@@ -1,0 +1,21 @@
+#codenameCanvas{
+    width: 100%;
+}
+
+p, h3, h4 {
+    width:60%;
+}
+
+p, input, button, label{
+    font-family: Arial, sans-serif;
+    font-size: .8rem;
+}
+
+button {
+    font-weight: bolder;
+    color: blue;
+}
+
+h3, h4 {
+    font-family: Arial, sans-serif;
+}

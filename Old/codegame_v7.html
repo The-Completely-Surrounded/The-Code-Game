@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <title>Code Game</title>
+</head>
+<body>
+<canvas id="codenameCanvas" >
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<h3>Game ID: <label id="randomID"></label></h3>
+
+<p>First Team Toggle: <button type="button" id="firstTeam" onclick="firstTeam()">Blue</button>   
+    <button type="button" id="revealButton" onclick="revealAnswers()">Reveal Hidden Cards</button></p>
+<p><a href="https://youtu.be/x6a3Z1Jq2hQ">How to Play & How to Setup on Hangouts/Zoom.</a></p><br />
+<p><strong>New Game Options</strong><br /> 
+    Language & Word List: <label for="language"></label><select id="language"><option value="en">English Standard</option><option value="du">Dutch Standard</option><option value="mv">English Movies</option></select>
+    Grid Height: <label for="gridHeight"></label><input type="number" id="gridHeight" value="5" min="2" max="15" maxlength="1" size="1">
+    Grid Width: <label for="gridWidth"></label><input type="number" id="gridWidth" value="5" min="2" max="15" maxlength="1" size="1"> 
+    Font Size: <label for="fontSize"></label><input type="number" id="fontSize" value="40" min="100" max="999" maxlength="3" size="3"> <br />
+    Assassins: <label for="assassins"></label><input type="number" id="assassins" value="1" min="1" max="200" maxlength="3" size="3"> 
+    First Team Spies: <label for="team1"></label><input type="number" id="team1" value="9" min="1" max="200" maxlength="3" size="3"> 
+    Second Team Spies: <label for="team2"></label><input type="number" id="team2" value="8" min="1" max="200" maxlength="1" size="1"> </p>
+<p>New Word List (totally alpha! Separate each word with a comma & space):</p>
+<input type="checkbox" id="customWords" name="customWords" value="true">
+<label for="customWords">Use custom word list</label><br>
+
+<p><label for="wordList"></label><textarea id="wordList" rows="10" cols="100"></textarea></p>
+    <button type="button" id="updateOptions" onclick="updateOptions()">Update Options</button>
+
+
+
+<script src="codegame_v7.js"></script>
+
+<br />
+<br />
+<br />
+<h3>The Online Code Game - v8<br />by Pete Vigeant (vigeant gmail / @greenghoulie)</h3>
+<h4>Notes</h4>
+<p>Latest update - I put in the ability to update/swap the word list. It's very alpha right now, but should work in a pinch. 
+You need to add your words in the box with a comma and space between each word. Everyone playing with this loaded on the screen (
+such as Captains) needs to paste the same wordlist and the same Game ID. Let me know if it works!</p>
+<p>Howdy. This is a tribute to a party game that I love - you should go buy a copy for yourself! I included some mods for you to play with, such as the ability to alter the number of hidden agents per team, the amount of assassins and even the amount of cards! The game uses my personal word list, which I made when creating a card game called The Good, the Bad & the Funny. Please let me know if you would like additional features or find any bugs.</p><p>
+    Please note, I am seeing some font issues on mobile devices. You have the option to up the font size - it may be necessary if you're choosing to use a phone with the Captains. Enjoy!</p>
+<h4>Game Setup</h4>
+<p>
+    Share the main board on the big screen or as a shared desktop/window. The player with access to the mouse is in charge of keeping the board updated with guesses by clicking on the individual “cards.” Each card cycles through the team colors, the bystander color (yellow), and gray. There is no public color for the Assassin as if the Assassin is “uncovered” the game is over.
+</p><p>  The team Captains find the Game ID number and enter that into her or his private view (via phone or similar). Be sure to copy the same game options if any are changed, to ensure the board is the same. The Captains with a private view can use the “Reveal Hidden Cards” link to see the locations of all of the cards, noting that the Assassin stays gray (I’ll likely change that in the next version!).
+</p><p> Once the game is over, simply reload the page and use a different Game ID.</p>
+<h4>How to Play</h4>
+<p>
+    The Online Code Game is a simple party game that is ideal for streaming over Hangouts or Zoom. The game is easy - there are two teams of 2+ players (Red and Blue), each with a Captain. The goal is for a team to discover the hidden agents (Red for the Red Team, Blue for the Blue Team) using only clues given by the Captain. The Captain has to give clues in a very particular way - one word and one number.
+</p><p>
+    For example, if there is a Blue Agent under "House" and a Blue Agent under "River," the Blue Captain can say "Boat 2," as "Boat" refers to 2 different hidden Blue Agents. If the non-Captain players guess the location of an Agent correctly (intentionally or not), those players can choose to make another guess or pass.
+</p><p>
+    The team that can find all of the team Agents first wins the game.
+</p><p>
+    Hidden under each word is either a Team Agent (Red or Blue), a Bystander (Yellow), or an Assassin (indicated as Gray when the colors are revealed). During a team turn, the Captain gives a single clue that refers to one or more hidden agents. The other team players then make a guess and, if correct, can choose to continue and make another guess. If an Agent for the other team is revealed or a Bystander is revealed, the turn ends. If an Assassin is revealed, the game is over and that team loses immediately!
+</p><p>
+    Captains are not allowed to give ANY other clues at all - none via facial movements or sounds or encouragements (no “table talk”).
+</p>
+</body>
+</html>

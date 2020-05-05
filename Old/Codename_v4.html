@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+
+<body>
+
+<canvas id="codenameCanvas" width="1024" height="640" >
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<p id="randomID"></p>
+
+
+<script>
+var canvas = document.getElementById('codenameCanvas');
+var ctx = canvas.getContext("2d");
+
+var canvasWidth = canvas.width;
+var canvasHeight = canvas.height;
+var gridWidth = 5;
+var gridHeight = 5;
+
+var team1 = 8;
+var team2 = 9;
+var assassin = 1;
+var hiddenCards = [];
+
+var borderSpace = 10;
+var cardColor1 = "Purple";
+var cardColor2 = "Yellow";
+var cardColor3 = "Red";
+var cardColor4 = "Blue";
+var fontColor = "Black";
+var gridTracker = [];
+
+var randomCode = Math.random();
+randomCode = randomCode.toFixed(4);
+randomCodeStuff();
+
+function randomCodeStuff() {
+    randomCode = prompt("Please enter a code:", randomCode);
+}
+
+function createHiddenGrid () {
+    for (i = 0; i < team1; i++) {
+        hiddenCards.push("team1");
+    }
+    for (j = 0; j < team2; j++) {
+        hiddenCards.push("team2");
+    }
+    for (k = 0; k < assassin; k++) {
+        hiddenCards.push("assassin");
+    }
+    for (l = 0; l < (gridWidth*gridHeight - (team1 + team2 + assassin)); l++) {
+        hiddenCards.push("bystander");
+    }
+    
+    shuffle(hiddenCards);
+
+    console.log(hiddenCards);
+}
+
+var wordList = ["beetle","bat","leather","sheet","moon","back","sheep","saddle","friction","dance","grass","tea","bucket","star","battery","knot","name","snap","cat","ear","way","tail","fire","stamp","harvest","pearl","organ","pie","ball","shore","furnace","press","monkey","nose","earth","frog","trial","flower","pipe","hip","rat","hound","steam","stone","swivel","boy","deck","pitch","staff","game","silk","comb","wax","tank","honey","hedge","washer","meat","shoe","compass","frame","cast","point","egg","fish","paste","strap","garden","show","wall","muscle","table","weather","pear","panel","note","cherry","sparrow","court","storm","half","penny","brace","butterfly","field","bow","door","bit","duck","coal","knife","stay","fork","line","tent","drag","lock","cattle","feather","cap","berry","steel","tool","rent","service","rake","strawberry","cream","built","work","stool","arm","head","neck","old","bear","ticket","apple","parrot","silver","shaft","culture","cricket","drill","night","wool","turtle","needle","pulley","net","oak","nerve","tower","mill","shield","iron","gate","time","lime","fox","clay","sick","vessel","tiger","life","gear","scraper","bay","hen","dove","hoop","plate","hole","bead","man","peach","space","hat","stall","ash","spoon","anchor","bull","pouch","stand","satin","train","ant","wolf","money","thorn","wheel","turkey","hood","free","mountain","writer","tub","cup","log","dry","shoulder","grinder","faucet","car","clamp","driver","sound","blind","keeper","bottle","quarter","cloth","blast","wire","alarm","gold","lip","hog","roll","slip","knee","pigeon","squirrel","cylinder","wind","coffee","ink","rag","valve","tin","pod","ore","molding","check","bank","cover","bound","pig","stick","hill","base","smoke","clover","mole","basket","brush","proof","sand","saw","pile","rest","hop","ring","call","school","cane","bolt","bark","over","cow","stuff","chain","butter","song","sail","spider","powder","good","sucker","joint","bath","screw","bean","bag","trap","river","purse","string","sap","drain","hunter","broom","filter","swing","air","shop","camp","paper","place","thread","ice","hay","rice","card","double","pulp","hook","player","chamber","mouth","insect","town","white","gang","fiber","oil","post","flag","pine","cable","mail","rail","nail","lance","coat","band","horse","ship","crab","milk","metal","breaker","doctor","lizard","roof","bug","fungus","dish","boat","center","plane","boot","woman","snake","tie","light","bed","marsh","stopper","floor","heel","fellow","book","tree","leaf","serpent","music","step","carpet","bar","machine","fan","horn","swamp","harness","board","wood","rod","hawk","worker","grape","truck","channel","trumpet","wagon","maker","sense","engine","barrel","rope","pin","drop","cone","corn","heat","carriage","love","pattern","room","self","meadow","moss","claw","slide","belt","spade","clip","cold","hair","sage","mud","sugar","sleeve","lamp","elbow","safety","party","after","salt","club","hammer","soap","rough","picture","cheese","sponge","face","pocket","watch","bond","ox","sack","owl","seat","crane","hot","thunder","blood","store","jaw","crown","meal","fuse","dust","rule","queen","axe","chimney","block","body","coach","tooth","loom","level","stock","catch","thumb","shark","spot","surface","king","bread","lift","oyster","chair","war","sun","tide","whale","signal","goose","road","market","poison","pan","bridge","sea","tile","rush","pilot","fruit","cord","cross","lap","key","wave","rose","rocket","sweet","dock","blow","orange","land","tongue","lace","yard","gum","vent","nut","pudding","brick","top","stage","finger","side","plug","bell","wing","pad","edge","case","glove","death","heart","test","winter","deer","drift","candle","lemon","tortoise","pit","cork","stitch","kettle","snow","file","box","spring","farm","rock","hose","lantern","potato","pole","match","bill","house","seed","seal","chest","cart","window","packing","rack","cutter","vine","stove","oven","scorpion","three","spear","button","ground","general","can","sword","toad","arrow","dog","diamond","crow","lady","grain","snail","mouse","chicken","letter","shot","plant","plum","meter","copper","bird","gas","parsley","bush","moth","shell","tube","bench","bone","piece","foot","race","cell","palm","collar","drum","scale","ladder","bee","worm","cotton","dress","mark","minded","lead","pond","motion","punch","flying","brain","timber","eater","stretcher","skin","holder","cake","master","clock","feeder","belly","brown","eel","stem","bait","glass","root","lever","leg","bonnet","guard","eye","mother","plow","guide","pink","main","print","fever","born","water","spirit","hand","clam","pump","rain","office"];
+
+shuffle(wordList);
+document.addEventListener("DOMContentLoaded", init, false);
+window.addEventListener("keydown", dealWithKeyboard, false);
+canvas.addEventListener("click", dealWithMouse, false);
+
+
+function dealWithKeyboard(e) {
+    rebuildGrid();
+}
+
+function dealWithMouse(e) {
+    var k = 0;
+
+    for (i = 0; i < gridHeight; i++) {
+        for (j = 0; j < gridWidth; j++) {
+            if (j * (canvasWidth / gridWidth) < e.x && e.x < (j+1) * (canvasWidth / gridWidth) && i * (canvasHeight / gridHeight) < e.y && e.y < (i + 1) * (canvasHeight / gridHeight)) {
+                gridTracker[k]++;
+            }
+
+            k++;
+        }
+    }
+
+    console.trace(e);
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    rebuildGrid();
+
+}
+
+function init() {
+    document.getElementById("randomID").innerHTML = randomCode;
+    createHiddenGrid();
+    buildFirstGrid();
+}
+
+function buildFirstGrid() {
+
+    var k = 0;
+
+    for (i = 0; i < gridHeight; i++) {
+        for (j = 0; j < gridWidth; j++) {
+            buildRectangle(cardColor1,j,i,k);
+            gridTracker[k] = 0;
+            k++;
+        }
+    }
+}
+
+function rebuildGrid() {
+
+    var k = 0;
+
+    for (i = 0; i < gridHeight; i++) {
+        for (j = 0; j < gridWidth; j++) {
+            switch (gridTracker[k]) {
+                case 0:
+                    buildRectangle(cardColor1,j,i,k);
+                break;
+                case 1:
+                    buildRectangle(cardColor2,j,i,k);
+                break;
+                case 2:
+                    buildRectangle(cardColor3,j,i,k);
+                break;
+                case 3:
+                    buildRectangle(cardColor4,j,i,k);
+                break;
+                case 4:
+                    gridTracker[k] = 0;
+                break;
+            }
+            k++;
+        }
+    }
+}
+
+function buildRectangle(myColor, j, i, k) {
+    ctx.fillStyle = myColor;
+    ctx.fillRect(j * (canvasWidth / gridWidth), i * (canvasHeight / gridHeight),(canvasWidth / gridWidth) - borderSpace,(canvasHeight / gridHeight) - borderSpace);
+    ctx.font="30px Georgia";
+    ctx.fillStyle = fontColor;
+
+    ctx.fillText(wordList[k],j * (canvasWidth / gridWidth) + (canvasWidth / gridWidth / 4),(i * (canvasHeight / gridHeight)) + (canvasHeight / gridHeight / 2));
+
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(randomCode * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+
+</script>
+</body>
+</html> 
