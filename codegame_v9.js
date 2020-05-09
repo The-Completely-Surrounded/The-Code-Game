@@ -478,6 +478,10 @@ function updateOptions() {
             for (let i = 0; i < movieWordList.length; i++){
                 wordList[i] = movieWordList[i];
             }
+        case "fr":
+            for (let i = 0; i < FRWordList.length; i++){
+                wordList[i] = FRWordList[i];
+            }
 /* //I wanted to automate this a bit, but it screws up some other stuff
             if (fontSize > 30){
                 fontSize = 20;
