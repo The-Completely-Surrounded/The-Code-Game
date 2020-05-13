@@ -478,6 +478,7 @@ function updateOptions() {
             for (let i = 0; i < movieWordList.length; i++){
                 wordList[i] = movieWordList[i];
             }
+            break;
         case "fr":
             for (let i = 0; i < FRWordList.length; i++){
                 wordList[i] = FRWordList[i];
