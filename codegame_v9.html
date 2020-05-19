@@ -9,7 +9,9 @@
 <body>
 <canvas id="codenameCanvas" >
     Your browser does not support the HTML5 canvas tag.
-</canvas><button type="button" onclick="gameIDToggle()" id="randomID"></button>
+</canvas><p><label for="countdownId">Timer: </label><input type="number" id="countdownId" value="30" min="0" max="200" maxlength="3" size="3"><button type="button" id="timerButton" onclick="startCountdown()">Start Timer</button>
+
+</p><button type="button" onclick="gameIDToggle()" id="randomID"></button>
 <button type="button" id="revealButton" onclick="revealAnswers()">Reveal Hidden Cards</button>
 
 <p>First Team Toggle: <button type="button" id="firstTeam" onclick="firstTeam()">Blue</button>   

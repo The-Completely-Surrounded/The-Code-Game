@@ -580,3 +580,26 @@ function shuffle(array) {
     return array;
 }
 
+//I want to include a countdown timer for players/teams that take too long
+let countdownTime = 20;
+
+
+function startCountdown(){
+    countdownTime = document.getElementById("countdownId").value;
+// Update the count down every 1 second
+let x = setInterval(function() {
+    
+    countdownTime-=1;
+
+    // Display the result in the element with id="countdownId"
+    document.getElementById("countdownId").value = countdownTime;
+
+    // If the count down is finished, write some text
+    if (countdownTime < 0) {
+        clearInterval(x);
+        document.getElementById("countdownId").value = 0;
+    }
+}, 1000);
+    }
+
+
