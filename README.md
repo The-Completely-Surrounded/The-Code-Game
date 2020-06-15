@@ -1,4 +1,6 @@
 # The Code Game
+Play here: http://thecompletelysurrounded.com/games/code
+
 This is a tribute to a party game that I love - you should go buy a copy for yourself! I included some mods for you to play with, such as the ability to alter the number of hidden agents per team, the amount of assassins and even the amount of cards! The game uses my personal word list, which I made when creating a card game called The Good, the Bad &amp; the Funny. Please let me know if you would like additional features or find any bugs.
 
 Explanation video:

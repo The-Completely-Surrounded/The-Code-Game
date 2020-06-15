@@ -195,9 +195,9 @@ let gameID = true;
 
 const borderSpace = 10;
 const cardColor1 = "silver";
-const cardColor2 = "GoldenRod";
-const cardColor3 = "Salmon";
-const cardColor4 = "SkyBlue";
+let cardColor2 = "GoldenRod";
+let cardColor3 = "Salmon";
+let cardColor4 = "SkyBlue";
 const fontColor = "Black";
 const gridTracker = [];
 
@@ -365,6 +365,9 @@ function init() {
 
 //First run first grid
 function buildFirstGrid() {
+    cardColor3 = 808080;
+    cardColor4 = document.getElementById("team2Color").value;
+    cardColor2 = document.getElementById("bystanderColor").value;
 
     let k = 0;
 
@@ -379,6 +382,9 @@ function buildFirstGrid() {
 
 //This needs to be called a lot to make sure everything is updated properly (canvas, amirite?!)
 function rebuildGrid() {
+    cardColor3 = document.getElementById("team1Color").value;
+    cardColor4 = document.getElementById("team2Color").value;
+    cardColor2 = document.getElementById("bystanderColor").value;
 
     let k = 0;
 
